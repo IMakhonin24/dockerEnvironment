@@ -24,6 +24,7 @@ services:
             ./php
         volumes:
             - ${APP_HOST}:/var/www/html
+            - /mail/msmtprc:/etc/msmtprc
         depends_on:
             - db
 
