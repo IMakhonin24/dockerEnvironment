@@ -1,0 +1,15 @@
+###############################
+### ignore env local files  ###
+###############################
+.idea
+.directory
+.DS_Store
+nbproject
+hyperterm_access*
+*.sublime-*
+node_modules
+.*.swp
+.*.kate-swp
+/*.tar.gz
+/*.tar.gz.*
+/*.psd
