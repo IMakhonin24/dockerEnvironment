@@ -5,7 +5,7 @@ services:
         image: httpd:2.4
         volumes:
             - ${APP_HOST}:/var/www/html
-            - ./httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
+            - ./${DOCKER_FOLDER_NAME}/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
         depends_on:
             - php
 
@@ -13,18 +13,18 @@ services:
         image: nginx:1.13
         ports:
             - 80:80
+            - 443:443
         volumes:
             - ${APP_HOST}:/var/www/html
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./${DOCKER_FOLDER_NAME}/nginx/nginx.conf:/etc/nginx/nginx.conf
         depends_on:
             - apache
 
     php:
         build:
-            ./php
+            ./${DOCKER_FOLDER_NAME}/php
         volumes:
             - ${APP_HOST}:/var/www/html
-            - /mail/msmtprc:/etc/msmtprc
         depends_on:
             - db
 
@@ -32,9 +32,9 @@ services:
         image: mysql:5.7
         restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: ${DB_MYSQL_ROOT_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${DOCKER_DB_MYSQL_ROOT_PASSWORD}
         volumes:
-            - ${DB_PATH_HOST}:/var/lib/mysql
+            - ./${DOCKER_FOLDER_NAME}/databases:/var/lib/mysql
 
     phpmyadmin:
         image: phpmyadmin
