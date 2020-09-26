@@ -4,7 +4,7 @@ services:
     apache:
         image: httpd:2.4
         volumes:
-            - ${APP_HOST}:/var/www/html
+            - ${DOCKER_APP_HOST}:/var/www/html
             - ./${DOCKER_FOLDER_NAME}/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
         depends_on:
             - php
@@ -15,7 +15,7 @@ services:
             - 80:80
             - 443:443
         volumes:
-            - ${APP_HOST}:/var/www/html
+            - ${DOCKER_APP_HOST}:/var/www/html
             - ./${DOCKER_FOLDER_NAME}/nginx/nginx.conf:/etc/nginx/nginx.conf
         depends_on:
             - apache
@@ -24,7 +24,7 @@ services:
         build:
             ./${DOCKER_FOLDER_NAME}/php
         volumes:
-            - ${APP_HOST}:/var/www/html
+            - ${DOCKER_APP_HOST}:/var/www/html
         depends_on:
             - db
 
